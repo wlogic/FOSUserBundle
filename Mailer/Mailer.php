@@ -45,7 +45,7 @@ class Mailer extends AbstractMailer
             'user' => $user,
             'confirmationUrl' => $url,
         ]);
-        $this->sendEmailMessage($this->parameters['from_email']['confirmation'], (string) $user->getEmail(),$rendered);
+        $this->sendMessage($this->parameters['from_email']['confirmation'], (string) $user->getEmail(),$rendered);
     }
 
     /**
@@ -59,29 +59,9 @@ class Mailer extends AbstractMailer
             'user' => $user,
             'confirmationUrl' => $url,
         ]);
-        $this->sendEmailMessage($this->parameters['from_email']['resetting'], (string) $user->getEmail(),$rendered);
+        $this->sendMessage($this->parameters['from_email']['resetting'], (string) $user->getEmail(),$rendered);
     }
 
-    /**
-     * @param string       $renderedTemplate
-     * @param array|string $fromEmail
-     * @param array|string $toEmail
-     */
-    protected function sendEmailMessage($renderedTemplate, $fromEmail, $toEmail)
-    {
-        // Render the email, use the first line as the subject, and the rest as the body
-        $renderedLines = explode("\n", trim($renderedTemplate));
-        $subject = array_shift($renderedLines);
-        $body = implode("\n", $renderedLines);
-
-        $message = (new \Swift_Message())
-            ->setSubject($subject)
-            ->setFrom($fromEmail)
-            ->setTo($toEmail)
-            ->setBody($body);
-
-        $this->mailer->send($message);
-    }
 
     /**
      * @inheritDoc
