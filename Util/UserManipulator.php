@@ -16,6 +16,7 @@ use FOS\UserBundle\FOSUserEvents;
 use FOS\UserBundle\Model\UserInterface;
 use FOS\UserBundle\Model\UserManagerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
@@ -217,7 +218,7 @@ class UserManipulator
     }
 
     /**
-     * @return Request
+     * @return  null|Request
      */
     private function getRequest()
     {
