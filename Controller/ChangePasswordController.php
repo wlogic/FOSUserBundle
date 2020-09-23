@@ -39,6 +39,13 @@ class ChangePasswordController extends AbstractController
     private $formFactory;
     private $userManager;
 
+    /**
+     * ChangePasswordController constructor.
+     *
+     * @param EventDispatcherInterface $eventDispatcher
+     * @param FactoryInterface         $formFactory
+     * @param UserManagerInterface     $userManager
+     */
     public function __construct(EventDispatcherInterface $eventDispatcher, FactoryInterface $formFactory, UserManagerInterface $userManager)
     {
         $this->eventDispatcher = $eventDispatcher;
@@ -48,6 +55,8 @@ class ChangePasswordController extends AbstractController
 
     /**
      * Change user password.
+     *
+     * @param Request $request
      *
      * @return Response
      */

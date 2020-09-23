@@ -48,7 +48,12 @@ class ResettingController extends AbstractController
     private $retryTtl;
 
     /**
-     * @param int $retryTtl
+     * @param EventDispatcherInterface $eventDispatcher
+     * @param FactoryInterface         $formFactory
+     * @param UserManagerInterface     $userManager
+     * @param TokenGeneratorInterface  $tokenGenerator
+     * @param MailerInterface          $mailer
+     * @param int                      $retryTtl
      */
     public function __construct(EventDispatcherInterface $eventDispatcher, FactoryInterface $formFactory, UserManagerInterface $userManager, TokenGeneratorInterface $tokenGenerator, MailerInterface $mailer, $retryTtl)
     {
@@ -70,6 +75,8 @@ class ResettingController extends AbstractController
 
     /**
      * Request reset user password: submit form and send email.
+     *
+     * @param Request $request
      *
      * @return Response
      */
@@ -123,6 +130,8 @@ class ResettingController extends AbstractController
     /**
      * Tell the user to check his email provider.
      *
+     * @param Request $request
+     *
      * @return Response
      */
     public function checkEmailAction(Request $request)
@@ -142,7 +151,8 @@ class ResettingController extends AbstractController
     /**
      * Reset user password.
      *
-     * @param string $token
+     * @param Request $request
+     * @param string  $token
      *
      * @return Response
      */

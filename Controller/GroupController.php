@@ -40,6 +40,13 @@ class GroupController extends AbstractController
     private $formFactory;
     private $groupManager;
 
+    /**
+     * GroupController constructor.
+     *
+     * @param EventDispatcherInterface $eventDispatcher
+     * @param FactoryInterface         $formFactory
+     * @param GroupManagerInterface    $groupManager
+     */
     public function __construct(EventDispatcherInterface $eventDispatcher, FactoryInterface $formFactory, GroupManagerInterface $groupManager)
     {
         $this->eventDispatcher = $eventDispatcher;
@@ -74,7 +81,8 @@ class GroupController extends AbstractController
     /**
      * Edit one group, show the edit form.
      *
-     * @param string $groupName
+     * @param Request $request
+     * @param string  $groupName
      *
      * @return Response
      */
@@ -119,6 +127,8 @@ class GroupController extends AbstractController
     /**
      * Show the new form.
      *
+     * @param Request $request
+     *
      * @return Response
      */
     public function newAction(Request $request)
@@ -156,7 +166,8 @@ class GroupController extends AbstractController
     /**
      * Delete one group.
      *
-     * @param string $groupName
+     * @param Request $request
+     * @param string  $groupName
      *
      * @return RedirectResponse
      */

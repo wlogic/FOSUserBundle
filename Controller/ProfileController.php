@@ -38,6 +38,13 @@ class ProfileController extends AbstractController
     private $formFactory;
     private $userManager;
 
+    /**
+     * ProfileController constructor.
+     *
+     * @param EventDispatcherInterface $eventDispatcher
+     * @param FactoryInterface         $formFactory
+     * @param UserManagerInterface     $userManager
+     */
     public function __construct(EventDispatcherInterface $eventDispatcher, FactoryInterface $formFactory, UserManagerInterface $userManager)
     {
         $this->eventDispatcher = $eventDispatcher;
@@ -62,6 +69,8 @@ class ProfileController extends AbstractController
 
     /**
      * Edit the user.
+     *
+     * @param Request $request
      *
      * @return Response
      */

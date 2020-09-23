@@ -42,6 +42,14 @@ class RegistrationController extends AbstractController
     private $userManager;
     private $tokenStorage;
 
+    /**
+     * RegistrationController constructor.
+     *
+     * @param EventDispatcherInterface $eventDispatcher
+     * @param FactoryInterface         $formFactory
+     * @param UserManagerInterface     $userManager
+     * @param TokenStorageInterface    $tokenStorage
+     */
     public function __construct(EventDispatcherInterface $eventDispatcher, FactoryInterface $formFactory, UserManagerInterface $userManager, TokenStorageInterface $tokenStorage)
     {
         $this->eventDispatcher = $eventDispatcher;
@@ -51,6 +59,8 @@ class RegistrationController extends AbstractController
     }
 
     /**
+     * @param Request $request
+     *
      * @return Response
      */
     public function registerAction(Request $request)
@@ -102,6 +112,10 @@ class RegistrationController extends AbstractController
 
     /**
      * Tell the user to check their email provider.
+     *
+     * @param Request $request
+     *
+     * @return RedirectResponse|Response
      */
     public function checkEmailAction(Request $request)
     {
@@ -126,7 +140,8 @@ class RegistrationController extends AbstractController
     /**
      * Receive the confirmation token from user email provider, login the user.
      *
-     * @param string $token
+     * @param Request $request
+     * @param string  $token
      *
      * @return Response
      */
@@ -160,6 +175,10 @@ class RegistrationController extends AbstractController
 
     /**
      * Tell the user his account is now confirmed.
+     *
+     * @param Request $request
+     *
+     * @return Response
      */
     public function confirmedAction(Request $request)
     {
@@ -175,6 +194,8 @@ class RegistrationController extends AbstractController
     }
 
     /**
+     * @param SessionInterface $session
+     *
      * @return string|null
      */
     private function getTargetUrlFromSession(SessionInterface $session)
