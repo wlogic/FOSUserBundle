@@ -117,7 +117,7 @@ class FOSUserExtensionTest extends TestCase
 
         $mailer = $this->configuration->getDefinition('fos_user.mailer.default');
         $parameters = $this->configuration->getParameterBag()->resolveValue(
-            $mailer->getArgument(3)
+            $mailer->getArgument(2)
         );
         $this->assertSame(
             [
@@ -139,7 +139,7 @@ class FOSUserExtensionTest extends TestCase
 
         $mailer = $this->configuration->getDefinition('fos_user.mailer.default');
         $parameters = $this->configuration->getParameterBag()->resolveValue(
-            $mailer->getArgument(3)
+            $mailer->getArgument(2)
         );
         $this->assertSame(
             [
@@ -343,6 +343,7 @@ class FOSUserExtensionTest extends TestCase
         $this->createFullConfiguration();
 
         $this->assertAlias('acme_my.mailer', 'fos_user.mailer');
+        $this->assertAlias('acme_my.templating', 'fos_user.templating');
         $this->assertAlias('acme_my.email_canonicalizer', 'fos_user.util.email_canonicalizer');
         $this->assertAlias('acme_my.username_canonicalizer', 'fos_user.util.username_canonicalizer');
     }
@@ -494,6 +495,7 @@ service:
     email_canonicalizer: acme_my.email_canonicalizer
     username_canonicalizer: acme_my.username_canonicalizer
     user_manager: acme_my.user_manager
+    templating: acme_my.templating
 group:
     group_class: Acme\MyBundle\Entity\Group
     form:
