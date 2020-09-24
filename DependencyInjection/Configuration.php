@@ -79,6 +79,12 @@ class Configuration implements ConfigurationInterface
                     return 'custom' === $v['db_driver'] && !empty($v['group']) && 'fos_user.group_manager.default' === $v['group']['group_manager'];
                 })
                 ->thenInvalid('You need to specify your own group manager service when using the "custom" driver.')
+            ->end()
+            ->validate()
+            ->ifTrue(function ($v) {
+                return 'templating' === null && 'fos_user.mailer.default' !== $v['service']['mailer'];
+            })
+            ->thenInvalid('You need to specify your own templating service when not using the fos_user.mailer.default.')
             ->end();
 
         $this->addProfileSection($rootNode);
