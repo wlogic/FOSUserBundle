@@ -8,46 +8,64 @@ cache:
 env:
   global:
     - PHPUNIT_FLAGS="-v"
+    - SIMPLE_PHPUNIT_INSTALL="true"
     - SYMFONY_PHPUNIT_DIR="$HOME/symfony-bridge/.phpunit"
 
 matrix:
   fast_finish: true
   include:
-    # Minimum supported dependencies with the latest and oldest PHP version
+      # Minimum supported dependencies with the latest and oldest PHP version
+    - php: 5.6
+      env: COMPOSER_FLAGS="--prefer-stable --prefer-lowest" SYMFONY_DEPRECATIONS_HELPER="max[self]=0" SIMPLE_PHPUNIT_INSTALL=''
     - php: 7.2
-      env: COMPOSER_FLAGS="--prefer-stable --prefer-lowest" SYMFONY_DEPRECATIONS_HELPER="max[self]=0"
-    - php: 7.1
+      env: COMPOSER_FLAGS="--prefer-stable --prefer-lowest" SYMFONY_DEPRECATIONS_HELPER="max[self]=0" SIMPLE_PHPUNIT_INSTALL=''
+    - php: 7.4
       env: COMPOSER_FLAGS="--prefer-stable --prefer-lowest" SYMFONY_DEPRECATIONS_HELPER="max[self]=0"
 
       # Test the latest stable release
-    - php: 7.1
+    - php: 5.6
+      env: COMPOSER_FLAGS="--prefer-lowest" SIMPLE_PHPUNIT_INSTALL=''
     - php: 7.2
-      env: COVERAGE=true PHPUNIT_FLAGS="-v --coverage-text"
+    - php: 7.4
+     env: COVERAGE=true PHPUNIT_FLAGS="-v --coverage-text"
 
       # Test LTS versions. This makes sure we do not use Symfony packages with version greater
       # than 2 or 3 respectively. Read more at https://github.com/symfony/lts
+    - php: 5.6
+      env: DEPENDENCIES="symfony/lts:^2" PACKAGE_VERSION=^2.
+    - php: 5.6
+      env: DEPENDENCIES="symfony/lts:^3" PACKAGE_VERSION=^2.
     - php: 7.2
-      env: DEPENDENCIES="symfony/lts:^2"
+      env: DEPENDENCIES="symfony/lts:^2" PACKAGE_VERSION=^2.
     - php: 7.2
-      env: DEPENDENCIES="symfony/lts:^3"
+      env: DEPENDENCIES="symfony/lts:^3" PACKAGE_VERSION=^2.
+    - php: 7.4
+      env: DEPENDENCIES="symfony/lts:^2" PACKAGE_VERSION=^2.
+    - php: 7.4
+      env: DEPENDENCIES="symfony/lts:^3" PACKAGE_VERSION=^2.
 
       # Latest commit to master
     - php: 7.4
       env: STABILITY="dev"
 
   allow_failures:
-    # Dev-master is allowed to fail.
+      # Dev-master is allowed to fail.
     - env: STABILITY="dev"
 
 before_install:
   - echo "memory_limit=4G" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
+  - if ! [ -z "$PACKAGE_VERSION" ]; then git pull --tags; export TAG=$(git tag 2> /dev/null | grep $(git tag | sed -e 's/^.//' | grep "$PACKAGE_VERSION" | tail -n1)); fi;
+  - echo ${TAG}
+  - if ! [ -z "$TAG" ]; then git checkout tags/${TAG} -b ${TAG}; fi;
   - if [[ $COVERAGE != true ]]; then phpenv config-rm xdebug.ini || true; fi
   - if ! [ -z "$STABILITY" ]; then composer config minimum-stability ${STABILITY}; fi;
   - if ! [ -v "$DEPENDENCIES" ]; then composer require --no-update ${DEPENDENCIES}; fi;
 
 install:
+  - echo ${COMPOSER_FLAGS}
   - composer update ${COMPOSER_FLAGS} --prefer-dist --no-interaction
-  - ./vendor/bin/simple-phpunit install
+  - ls -la ./vendor/bin
+  - if ! [ -z "$SIMPLE_PHPUNIT_INSTALL" ]; then ./vendor/bin/simple-phpunit install; fi;
 
 script:
   - composer validate --strict --no-check-lock
