@@ -29,7 +29,7 @@ class UserManagerTest extends TestCase
     /** @var \PHPUnit_Framework_MockObject_MockObject */
     protected $repository;
 
-    protected function setUp()
+    protected function setUp(): void
     {
 //        if (!interface_exists('Doctrine\ORM\EntityManagerInterface')) {
 //            $this->markTestSkipped('Doctrine Common has to be installed for this test to run.');

@@ -25,7 +25,7 @@ class FlashListenerTest extends TestCase
     /** @var FlashListener */
     private $listener;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->event = new Event();
 
