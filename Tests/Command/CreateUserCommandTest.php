@@ -45,7 +45,7 @@ class CreateUserCommandTest extends TestCase
 
         $helper->expects($this->exactly(3))
             ->method('ask')
-            ->willReturnOnConsecutiveCalls( 'user', 'email', 'pass');
+            ->willReturnOnConsecutiveCalls('user', 'email', 'pass');
 
         $application->getHelperSet()->set($helper, 'question');
 

@@ -13,8 +13,8 @@ namespace FOS\UserBundle\Tests\Security;
 
 use FOS\UserBundle\Security\EmailProvider;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
+use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 
 class EmailProviderTest extends TestCase
 {

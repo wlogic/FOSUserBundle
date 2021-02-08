@@ -46,7 +46,6 @@ class ChangePasswordCommandTest extends TestCase
             ->method('ask')
             ->willReturnOnConsecutiveCalls('user', 'pass');
 
-
         $application->getHelperSet()->set($helper, 'question');
 
         $commandTester = $this->createCommandTester($this->getManipulator('user', 'pass'), $application);

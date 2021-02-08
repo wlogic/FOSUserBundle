@@ -16,7 +16,6 @@ use FOS\UserBundle\FOSUserEvents;
 use PHPUnit\Framework\TestCase;
 use Symfony\Contracts\EventDispatcher\Event;
 
-
 class FlashListenerTest extends TestCase
 {
     /** @var Event */

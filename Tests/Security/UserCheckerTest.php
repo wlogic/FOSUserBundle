@@ -20,7 +20,6 @@ use Symfony\Component\Security\Core\Exception\LockedException;
 
 class UserCheckerTest extends TestCase
 {
-
     public function testCheckPreAuthFailsLockedOut()
     {
         $this->expectException(LockedException::class);

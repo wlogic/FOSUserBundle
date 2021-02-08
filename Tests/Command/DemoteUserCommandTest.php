@@ -44,7 +44,7 @@ class DemoteUserCommandTest extends TestCase
 
         $helper->expects($this->exactly(2))
             ->method('ask')
-            ->willReturnOnConsecutiveCalls( 'user', 'role');
+            ->willReturnOnConsecutiveCalls('user', 'role');
 
         $application->getHelperSet()->set($helper, 'question');
 

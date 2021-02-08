@@ -11,9 +11,6 @@
 
 namespace FOS\UserBundle\Tests\Doctrine;
 
-use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\Persistence\ObjectRepository;
 use FOS\UserBundle\Doctrine\UserManager;
 use FOS\UserBundle\Model\User;
 use PHPUnit\Framework\TestCase;
@@ -47,7 +44,7 @@ class UserManagerTest extends TestCase
 
         $this->om = $this
             ->getMockBuilder('\Doctrine\ORM\EntityManagerInterface')
-            ->setMethods(['getRepository', 'getClassMetadata', 'remove', 'persist','flush'])
+            ->setMethods(['getRepository', 'getClassMetadata', 'remove', 'persist', 'flush'])
             ->disableOriginalConstructor()
             ->getMock();
 

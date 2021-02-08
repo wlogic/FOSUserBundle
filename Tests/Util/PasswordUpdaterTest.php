@@ -14,7 +14,6 @@ namespace FOS\UserBundle\Tests\Util;
 use FOS\UserBundle\Tests\TestUser;
 use FOS\UserBundle\Util\PasswordUpdater;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\Security\Core\Encoder\NativePasswordEncoder;
 
 class PasswordUpdaterTest extends TestCase
 {
@@ -44,7 +43,7 @@ class PasswordUpdaterTest extends TestCase
 
         $encoder->expects($this->once())
             ->method('encodePassword')
-            ->with('password', $this->logicalOr($this->isType('string'),$this->isNull()))
+            ->with('password', $this->logicalOr($this->isType('string'), $this->isNull()))
             ->will($this->returnValue('encodedPassword'));
 
         $this->updater->hashPassword($user);
@@ -52,7 +51,7 @@ class PasswordUpdaterTest extends TestCase
         $this->assertNull($user->getPlainPassword(), '->updatePassword() erases credentials');
     }
 
-     public function testDoesNotUpdateWithoutPlainPassword()
+    public function testDoesNotUpdateWithoutPlainPassword()
     {
         $user = new TestUser();
         $user->setPassword('hash');
