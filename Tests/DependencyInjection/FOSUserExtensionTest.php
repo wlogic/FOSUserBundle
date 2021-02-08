@@ -27,9 +27,6 @@ class FOSUserExtensionTest extends TestCase
         $this->configuration = null;
     }
 
-    /**
-     *
-     */
     public function testUserLoadThrowsExceptionUnlessDatabaseDriverSet()
     {
         $this->expectException(InvalidConfigurationException::class);
@@ -39,9 +36,6 @@ class FOSUserExtensionTest extends TestCase
         $loader->load([$config], new ContainerBuilder());
     }
 
-    /**
-     *
-     */
     public function testUserLoadThrowsExceptionUnlessDatabaseDriverIsValid()
     {
         $this->expectException(InvalidConfigurationException::class);
@@ -51,9 +45,6 @@ class FOSUserExtensionTest extends TestCase
         $loader->load([$config], new ContainerBuilder());
     }
 
-    /**
-     *
-     */
     public function testUserLoadThrowsExceptionUnlessFirewallNameSet()
     {
         $this->expectException(InvalidConfigurationException::class);
@@ -63,9 +54,6 @@ class FOSUserExtensionTest extends TestCase
         $loader->load([$config], new ContainerBuilder());
     }
 
-    /**
-     *
-     */
     public function testUserLoadThrowsExceptionUnlessGroupModelClassSet()
     {
         $this->expectException(InvalidConfigurationException::class);
@@ -75,9 +63,6 @@ class FOSUserExtensionTest extends TestCase
         $loader->load([$config], new ContainerBuilder());
     }
 
-    /**
-     *
-     */
     public function testUserLoadThrowsExceptionUnlessUserModelClassSet()
     {
         $this->expectException(InvalidConfigurationException::class);
@@ -87,9 +72,6 @@ class FOSUserExtensionTest extends TestCase
         $loader->load([$config], new ContainerBuilder());
     }
 
-    /**
-     *
-     */
     public function testCustomDriverWithoutManager()
     {
         $this->expectException(InvalidConfigurationException::class);

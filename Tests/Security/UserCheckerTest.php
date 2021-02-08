@@ -20,9 +20,7 @@ use Symfony\Component\Security\Core\Exception\LockedException;
 
 class UserCheckerTest extends TestCase
 {
-    /**
-     *
-     */
+
     public function testCheckPreAuthFailsLockedOut()
     {
         $this->expectException(LockedException::class);
@@ -32,9 +30,6 @@ class UserCheckerTest extends TestCase
         $checker->checkPreAuth($userMock);
     }
 
-    /**
-     *
-     */
     public function testCheckPreAuthFailsIsEnabled()
     {
         $this->expectException(DisabledException::class);
@@ -44,9 +39,6 @@ class UserCheckerTest extends TestCase
         $checker->checkPreAuth($userMock);
     }
 
-    /**
-     *
-     */
     public function testCheckPreAuthFailsIsAccountNonExpired()
     {
         $this->expectException(AccountExpiredException::class);
@@ -68,9 +60,6 @@ class UserCheckerTest extends TestCase
         }
     }
 
-    /**
-     *
-     */
     public function testCheckPostAuthFailsIsCredentialsNonExpired()
     {
         $this->expectException(CredentialsExpiredException::class);

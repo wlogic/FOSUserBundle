@@ -84,9 +84,6 @@ class UserManipulatorTest extends TestCase
         $this->assertTrue($user->isEnabled());
     }
 
-    /**
-     *
-     */
     public function testActivateWithInvalidUsername()
     {
         $this->expectException(\InvalidArgumentException::class);
@@ -139,9 +136,6 @@ class UserManipulatorTest extends TestCase
         $this->assertFalse($user->isEnabled());
     }
 
-    /**
-     *
-     */
     public function testDeactivateWithInvalidUsername()
     {
         $this->expectException(\InvalidArgumentException::class);
@@ -194,9 +188,6 @@ class UserManipulatorTest extends TestCase
         $this->assertTrue($user->isSuperAdmin());
     }
 
-    /**
-     *
-     */
     public function testPromoteWithInvalidUsername()
     {
         $this->expectException(\InvalidArgumentException::class);
@@ -249,9 +240,6 @@ class UserManipulatorTest extends TestCase
         $this->assertFalse($user->isSuperAdmin());
     }
 
-    /**
-     *
-     */
     public function testDemoteWithInvalidUsername()
     {
         $this->expectException(\InvalidArgumentException::class);
@@ -307,9 +295,6 @@ class UserManipulatorTest extends TestCase
         $this->assertSame($password, $user->getPlainPassword());
     }
 
-    /**
-     *
-     */
     public function testChangePasswordWithInvalidUsername()
     {
         $this->expectException(\InvalidArgumentException::class);

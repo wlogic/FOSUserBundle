@@ -45,9 +45,6 @@ class EmailProviderTest extends TestCase
         $this->assertSame($user, $this->userProvider->loadUserByUsername('foobar'));
     }
 
-    /**
-     *
-     */
     public function testLoadUserByInvalidUsername()
     {
         $this->expectException(UsernameNotFoundException::class);
@@ -82,9 +79,6 @@ class EmailProviderTest extends TestCase
         $this->assertSame($refreshedUser, $this->userProvider->refreshUser($user));
     }
 
-    /**
-     *
-     */
     public function testRefreshDeleted()
     {
         $this->expectException(UsernameNotFoundException::class);
@@ -100,9 +94,6 @@ class EmailProviderTest extends TestCase
         $this->userProvider->refreshUser($user);
     }
 
-    /**
-     *
-     */
     public function testRefreshInvalidUser()
     {
         $this->expectException(UnsupportedUserException::class);
@@ -114,9 +105,6 @@ class EmailProviderTest extends TestCase
         $this->userProvider->refreshUser($user);
     }
 
-    /**
-     *
-     */
     public function testRefreshInvalidUserClass()
     {
         $this->expectException(UnsupportedUserException::class);
