@@ -1,9 +1,12 @@
 build:
   environment:
     php:
-      version: '7.4'
+      version: '8.0'
   nodes:
     analysis:
+      dependencies:
+        before:
+          - composer require friendsofphp/php-cs-fixer
       project_setup:
         override:
           - 'true'
@@ -11,8 +14,8 @@ build:
         override:
           - php-scrutinizer-run
           -
-            command: phpcs-run
-            use_website_config: true
+            command: ./vendor/bin/php-cs-fixer fix /home/scrutinizer/build
+            use_website_config: false
 checks:
   php: true
 coding_style:
