@@ -14,7 +14,7 @@ namespace FOS\UserBundle\Tests\Security;
 use FOS\UserBundle\Security\EmailProvider;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
-use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
+use Symfony\Component\Security\Core\Exception\UserNotFoundException;
 
 class EmailProviderTest extends TestCase
 {
@@ -47,7 +47,7 @@ class EmailProviderTest extends TestCase
 
     public function testLoadUserByInvalidUsername()
     {
-        $this->expectException(UsernameNotFoundException::class);
+        $this->expectException(UserNotFoundException::class);
         $this->userManager->expects($this->once())
             ->method('findUserByEmail')
             ->with('foobar')
@@ -81,7 +81,7 @@ class EmailProviderTest extends TestCase
 
     public function testRefreshDeleted()
     {
-        $this->expectException(UsernameNotFoundException::class);
+        $this->expectException(UserNotFoundException::class);
         $user = $this->getMockForAbstractClass('FOS\UserBundle\Model\User');
         $this->userManager->expects($this->once())
             ->method('findUserBy')
