@@ -14,7 +14,7 @@ build:
         override:
           - php-scrutinizer-run
           -
-            command: ./vendor/bin/php-cs-fixer fix /home/scrutinizer/build
+            command: ./vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.dist.php /home/scrutinizer/build
             use_website_config: false
 checks:
   php: true
