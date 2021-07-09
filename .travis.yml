@@ -11,6 +11,7 @@ env:
     - PHPUNIT_FLAGS="-v"
     - PHPUNIT_VERSION=""
     - SIMPLE_PHPUNIT_INSTALL="true"
+    - SYMFONY_SHOW_VERSION="true"
     - SYMFONY_PHPUNIT_DIR="$HOME/symfony-bridge/.phpunit"
 
 matrix:
@@ -96,6 +97,7 @@ install:
   - echo ${COMPOSER_FLAGS}
   - composer update ${COMPOSER_FLAGS} --prefer-dist --no-interaction
   - echo ${SIMPLE_PHPUNIT_INSTALL}
+  - if ! [ -z "$SYMFONY_SHOW_VERSION" ]; then cat vendor/symfony/symfony/src/Symfony/Component/HttpKernel/Kernel.php | grep -w 'VERSION' | awk '{print $4}' | sed "s/[;']//g"; fi;
   - if ! [ -z "$SIMPLE_PHPUNIT_INSTALL" ]; then ./vendor/bin/simple-phpunit install; fi;
 
 script:
